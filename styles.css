@@ -248,12 +248,7 @@ input:focus{
  font-weight: 500;
  font-size: var(--medium);
 }
-#submit:hover{
- cursor: pointer;
- border: 1px solid var(--teal);
- background-color: var(--teal);
- color: var(--white);
-}
+
 
 /* Media Queries */
 @media screen and (max-width: 600px){
@@ -263,9 +258,13 @@ input:focus{
  }
  header{
   position: unset;
+  top: 0;
   text-align: center;
+  /* border-bottom: 5px solid var(--teal); */
+  /* margin-bottom: 200px; */
  }
  #main{
+  /* margin-top: 10%; */
   flex-direction: column;
   height: auto;
  }
@@ -287,12 +286,23 @@ input:focus{
   gap: 0;
  }
  aside{
-  border-top: 5px solid var(--teal);
+  /* box-shadow: 0 0 10px 10px var(--teal); */
+  /* border-top: 3px solid var(--dark-teal); */
   /* display: none; */
   position: unset;
   right: unset;
   width: 100%;
   height: 1000px;
+ }
+ #submit{
+  width: 100%;
+ }
+ #add{
+  text-align: center;
+  margin-top: 10px;
+ }
+ #prompts{
+  margin-top: 0;
  }
  
 }
