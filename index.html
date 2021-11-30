@@ -1,1 +1,67 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="styles.css">
+ <script src="app.js"></script>
+ <title>Library</title>
+</head>
+<body>
+
+ <header class="row">
+  <h1 id="title">Library</h1>
+ </header>
+
+ <div id="main">
+  <section id="content" class="column">
+   <div id="cards">
+
+    <div class="card">
+     <h2>Crime and Punishment</h2>
+     <h4>By <span>Fyodor Dostoevsky</span></h4>
+     <h6>58 pages</h6>
+     <div class="buttons column">
+      <button class="bool">Read</button>
+      <button class="del">Delete</button>
+     </div>
+    </div>
+    
+    
+   
+   </div>
+  </section>
+  
+  <aside class="column">
+   <div id="sidebar-content" class="column">
+    <p>Total number of books:</p>
+    <p>Read:</p>
+    <p>Not Read:</p>
+    <hr>
+    <p id="add">Add book</p>
+    <form id="prompts" class="column">
+     <div class="prompt column">
+      <label for="">Book title</label>
+      <input type="text" name="" id="title-inp">
+     </div>
+     <div class="prompt column">
+      <label for="">Author</label>
+      <input type="text" name="" id="author-inp">
+     </div>
+     <div class="prompt column">
+      <label for="">Pages</label>
+      <input type="number" name="" id="pages-inp">
+     </div>
+     <div id="check-div" class="prompt row">
+      <input type="checkbox" name="" id="">
+      <label for="">Did you read this book?</label>
+     </div>
+     <button id="submit">Add book</button>
+    </form>
+   </div>
+  </aside>
+ </div>
+
+</body>
+</html>
