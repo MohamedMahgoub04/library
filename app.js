@@ -1,12 +1,22 @@
 const form = document.querySelector('form')
 const submit = document.querySelector('#submit')
+let myLibrary = []
 
-function addBook(){
+function Book(title, author, pages, status){
+ this.title = title
+ this.author = author
+ this.pages = pages
+ this.status = status
+}
 
+function addBookToLibrary(Book){
+ myLibrary.append(Book)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
  document.querySelector('#submit').disabled = true
+
+ 
  
 
  document.addEventListener('keyup', () => {
@@ -24,15 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
    document.querySelector('#submit').disabled = true
   }
  })
+
+
  document.querySelector('form').onsubmit = () => {
   let div = document.createElement('div')
   const h2 = document.createElement('h2')
   const h4 = document.createElement('h4')
   const h6 = document.createElement('h6')
-  
-  let title = document.querySelector('#title-inp').value
-  let author = document.querySelector('#author-inp').value
-  let pages = document.querySelector('#pages-inp').value
+
+  let book = new Book(document.querySelector('#title-inp').value, document.querySelector('#author-inp').value, document.querySelector('#pages-inp').value, 'no')
+  addBookToLibrary(book)
+  console.log(myLibrary)
+  // let title = document.querySelector('#title-inp').value
+  // let author = document.querySelector('#author-inp').value
+  // let pages = document.querySelector('#pages-inp').value
 
   div.className = 'card'
   h2.innerHTML = title

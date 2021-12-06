@@ -6,7 +6,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="styles.css">
  <link rel="icon" href="book.png">
- <script src="app.js"></script>
+ <script src="script.js"></script>
  <title>Library</title>
 </head>
 <body>
@@ -36,9 +36,9 @@
   
   <aside class="column">
    <div id="sidebar-content" class="column">
-    <p>Total number of books:</p>
-    <p>Read:</p>
-    <p>Not Read:</p>
+    <p id="total-num">Total number of books: 0</p>
+    <p id="total-read">Read: 0</p>
+    <p id="total-notread">Not Read: 0</p>
     <hr>
     <p id="add">Add book</p>
     <form id="prompts" class="column">
@@ -55,10 +55,10 @@
       <input type="number" name="" id="pages-inp">
      </div>
      <div id="check-div" class="prompt row">
-      <input type="checkbox" name="" id="">
-      <label for="">Did you read this book?</label>
+      <input type="checkbox" name="" id="bool-inp">
+      <label for="bool-inp">Did you read this book?</label>
      </div>
-     <button id="submit">Add book</button>
+     <button type="button" id="submit">Add book</button>
     </form>
    </div>
   </aside>

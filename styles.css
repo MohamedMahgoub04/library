@@ -15,7 +15,9 @@
  --small: 14px;
 
  --yes: rgb(186, 219, 204);
+ --yes-hover: #9BCBB5;
  --no: rgb(245, 194, 199);
+ --no-hover: #ED919A;
 }
 *{
  border: none;
@@ -158,12 +160,25 @@ h6{
  /* color: var(--white); */
 }
 .bool{
+ transition: 0.1s;
  background-color: var(--yes);
 }
 .del{
+ transition: 0.1s;
  background-color: var(--no);
 }
-
+.bool:hover{
+ transition: 0.1s;
+ background-color: var(--yes-hover);
+}
+.del:hover{
+ transition: 0.1s;
+ background-color: var(--no-hover);
+}
+.bold{
+ color: var(--black);
+ font-weight: 500;
+}
 
 
 
@@ -304,5 +319,8 @@ input:focus{
  #prompts{
   margin-top: 0;
  }
- 
+ .no-books{
+  /* color: green; */
+  padding: 20px;
+ }
 }
