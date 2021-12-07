@@ -44,60 +44,7 @@ function Book(title, author, pages, status){
  this.status = status
 }
 
-// function addBookToLibrary(Book){
-//  let div = document.createElement('div')
-//  const h2 = document.createElement('h2')
-//  const h4 = document.createElement('h4')
-//  const h6 = document.createElement('h6')
-//  let del = document.createElement('button')
-//  let bool = document.createElement('button')
-
-//  myLibrary.push(Book)
- 
-//  let parent = document.createElement('div')
-//  parent.className = 'card'
-//  h2.innerHTML = Book.title
- 
-//  h4.innerHTML = `By <span>${Book.author}</span>`
-//  h6.innerHTML = `${Book.pages} pages`
-//  del.className = 'del'
-//  del.setAttribute('data-index', index)
-//  del.setAttribute('type', 'button')
-//  del.innerHTML = 'Delete'
-//  bool.className = 'bool'
-//  bool.innerHTML = 'Read'
-
-//  document.querySelector('#cards').append(parent)
-//  parent.append(h2)
-//  parent.append(h4)
-//  parent.append(h6)
-//  div.className = 'buttons column'
-//  div.append(bool)
-//  div.append(del)
-//  parent.append(div)
-
-//  index++
-
-//  document.querySelector('#total-num').innerHTML = `Total number of books: <span class='bold'>${myLibrary.length}</span>`
-// }
-// function removeBook(){
-
-//    let parent = this.closest('.card')
-//    console.log(parent)
-//    let title = parent.querySelector('h2')
-//    parent.remove()
-
-//    for (i of myLibrary){
-//     if (i.title == title.innerHTML){
-//      parent.remove()
-//      myLibrary.pop(i)
-//      console.log(myLibrary)
-//     }
-//    }
-  
-// }
-
-function loop(Book){
+function addBookToLibrary(Book){
  let readTotal = 0
  let notReadTotal = 0
  if (Book !== 0){
@@ -123,7 +70,6 @@ function loop(Book){
   del.className = `del ${index}`
   del.setAttribute('data-index', index)
   del.setAttribute('type', 'button')
-  // del.setAttribute('onclick', 'removeBook()')
   del.innerHTML = 'Delete'
   setReadStatus(i)
 
@@ -136,57 +82,52 @@ function loop(Book){
   div.append(del)
   parent.append(div)
  }
-
 }
 
+const save = () => {
+ localStorage.setItem('library', JSON.stringify(myLibrary))
+}
 
+const retrieve = () => {
+ let data = localStorage.getItem('library')
+ myLibrary = JSON.parse(data)
+ if (myLibrary.length == 0){
+  const h2 = document.createElement('h2')
+  h2.innerHTML = 'There are no books in your library, please add some books.'
+  h2.className = 'no-books'
+  document.querySelector('#cards').append(h2)
+ } else {
+  addBookToLibrary(0)
+ }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
- let cards = document.querySelector('#cards')
- 
- // console.log(document.querySelector('.del').closest('.card'))
- // Array.from(document.getElementsByClassName('del')).forEach(x => {
- //  x.onclick = () => {
 
- //   let parent = x.closest('.card')
- //   console.log(parent)
- //   let title = parent.querySelector('h2')
- //   parent.remove()
 
- //   for (i of myLibrary){
- //    if (i.title == title.innerHTML){
- //     parent.remove()
- //     myLibrary.pop(i)
- //     console.log(myLibrary)
- //    }
- //   }
-
- //  }
- // })
+ retrieve()
 
  document.addEventListener('click', () => {
   if (!event.target.matches('.del')) return
   let parent = event.target.closest('.card')
-   console.log(parent)
-   let title = parent.querySelector('h2')
-   // parent.remove()
+  console.log(parent)
+  let title = parent.querySelector('h2')
 
-   for (i of myLibrary){
-    if (i.title == title.innerHTML){
-     parent.remove()
-     myLibrary.splice(myLibrary.indexOf(i), 1)
-     console.log(myLibrary)
-    }
+  for (i of myLibrary){
+   if (i.title == title.innerHTML){
+    parent.remove()
+    myLibrary.splice(myLibrary.indexOf(i), 1)
+    console.log(myLibrary)
    }
-   loop(0)
-   if (myLibrary.length == 0){
-    const h2 = document.createElement('h2')
-    h2.innerHTML = 'There are no books in your library, please add some books.'
-    h2.className = 'no-books'
-    document.querySelector('#cards').append(h2)
-   }
+  }
+  save()
+  addBookToLibrary(0)
+  if (myLibrary.length == 0){
+   const h2 = document.createElement('h2')
+   h2.innerHTML = 'There are no books in your library, please add some books.'
+   h2.className = 'no-books'
+   document.querySelector('#cards').append(h2)
+  }
  })
-
 
 
  document.querySelector('#submit').onclick = () => {
@@ -198,16 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let newBook = new Book(document.querySelector('#title-inp').value, document.querySelector('#author-inp').value, document.querySelector('#pages-inp').value, document.querySelector('#bool-inp').value)
 
-  // addBookToLibrary(newBook)
-  // removeBook(newBook)
-  loop(newBook)
+  addBookToLibrary(newBook)
   console.log(myLibrary)
 
   document.querySelector('#title-inp').value = ''
   document.querySelector('#author-inp').value = ''
   document.querySelector('#pages-inp').value = ''
-  
-
+  save()
  }
 
 
