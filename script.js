@@ -91,7 +91,7 @@ const save = () => {
 const retrieve = () => {
  let data = localStorage.getItem('library')
  myLibrary = JSON.parse(data)
- if (myLibrary.length == 0){
+ if (myLibrary == null || myLibrary.length == 0){
   const h2 = document.createElement('h2')
   h2.innerHTML = 'There are no books in your library, please add some books.'
   h2.className = 'no-books'
