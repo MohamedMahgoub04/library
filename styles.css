@@ -51,6 +51,8 @@ header{
  background-color: var(--black);
  justify-content: center;
  align-items: center;
+ box-shadow: 0px 13px 27px -5px rgba(50,50,93,0.25) , 0px 8px 16px -8px rgba(0,0,0,0.3) , 0px -6px 16px -6px rgba(0,0,0,0.025) ;
+ z-index: 1;
 }
 #title{
  color: var(--white);
@@ -73,27 +75,19 @@ header{
  height: auto;
 }
 #cards{
- /* display: flex;
- flex-direction: row;
- flex-wrap: wrap;
- justify-content: space-around; */
  column-gap: max(5rem);
- /* row-gap: 50px; */
- row-gap: max(2rem);
+ row-gap: max(5rem);
  margin: auto;
  width: 90%;
  height: 90%;
-
  display: grid;
  grid-template: 1fr / repeat(auto-fit, minmax(235px, 1fr));
 }
 .card{
  display: flex;
  flex-direction: column;
- /* width: 235px; */
  align-items: center;
  border-radius: 10px;
- /* border: 1px solid var(--black); */
  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.14) , 0px 1px 10px 0px rgba(0,0,0,0.12) , 0px 2px 4px -1px rgba(0,0,0,0.2) ;
  background-color: var(--light-yellow);
  height: 300px;
@@ -261,6 +255,9 @@ input:focus{
   padding: 50px 0;
  }
  #cards{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
  }
  .card{

@@ -65,6 +65,18 @@ function displayBooks(){
  
    
 }
+const save = () => {
+ localStorage.setItem('library', JSON.stringify(myLibrary))
+}
+const retrieve = () => {
+ let data = localStorage.getItem('library')
+ myLibrary = JSON.parse(data)
+ if (myLibrary == null || myLibrary.length == 0){
+  emptyLibraryMessage()
+ } else {
+  displayBooks()
+ }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
  const titleInput = document.querySelector('#title-inp')
@@ -77,9 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   pagesInput.value = ''
  }
 
- if (myLibrary == null || myLibrary.length == 0){
-  emptyLibraryMessage()
- }
+ retrieve()
 
  submit.onclick = () => {
   let currentBook = new CreateBook(titleInput.value, authorInput.value, pagesInput.value, 'true')
