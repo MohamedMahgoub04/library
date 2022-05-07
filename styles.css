@@ -68,7 +68,6 @@ header{
  flex-direction: row;
 }
 #content{
- 
  background-color: var(--white);
  border-left: 10px solid var(--teal);
  width: 70%;
@@ -136,18 +135,27 @@ h6{
  font-size: var(--medium);
  font-weight: 300;
 }
-.bool{
+.read{
  transition: 0.1s;
  background-color: var(--yes);
+}
+.read:hover{
+ transition: 0.1s;
+ background-color: var(--yes-hover);
+}
+.not-read{
+ transition: 0.1s;
+ background-color: var(--no);
+}
+.not-read:hover{
+ transition: 0.1s;
+ background-color: var(--no-hover);
 }
 .del{
  transition: 0.1s;
  background-color: var(--no);
 }
-.bool:hover{
- transition: 0.1s;
- background-color: var(--yes-hover);
-}
+
 .del:hover{
  transition: 0.1s;
  background-color: var(--no-hover);
