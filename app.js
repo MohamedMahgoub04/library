@@ -10,15 +10,12 @@ function addBookToLibrary(book){
  myLibrary.push(book)
 }
 function emptyLibraryMessage(){
- if (myLibrary == null || myLibrary.length == 0){
-  let h2 = document.createElement('h2')
-  h2.innerHTML = 'There are no books in your library, please add some books.'
-  h2.className = 'no-books'
-  document.querySelector('#cards').append(h2)
- }
+ let h2 = document.createElement('h2')
+ h2.innerHTML = 'There are no books in your library, please add some books.'
+ h2.className = 'no-books'
+ document.querySelector('#cards').append(h2)
 }
 function displayBooks(){
- 
  
  document.querySelector('#cards').innerHTML = ''
  let index = 0
@@ -45,16 +42,16 @@ function displayBooks(){
   del.innerHTML = 'Delete'
   del.addEventListener('click', removeBook)
   function removeBook(){
-   
    let index = del.getAttribute('data-index')
    myLibrary.splice(index, 1)
    parent.remove()
+   save()
    displayBooks()
-   emptyLibraryMessage()
+   if (myLibrary == null || myLibrary.length == 0){
+    emptyLibraryMessage()
+   }
   }
   
-  
-
   document.querySelector('#cards').append(parent)
   parent.append(h2)
   parent.append(h4)
@@ -68,6 +65,18 @@ function displayBooks(){
  
    
 }
+const save = () => {
+ localStorage.setItem('library', JSON.stringify(myLibrary))
+}
+const retrieve = () => {
+ let data = localStorage.getItem('library')
+ myLibrary = JSON.parse(data)
+ if (myLibrary == null || myLibrary.length == 0){
+  emptyLibraryMessage()
+ } else {
+  displayBooks()
+ }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
  const titleInput = document.querySelector('#title-inp')
@@ -79,17 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
   authorInput.value = ''
   pagesInput.value = ''
  }
- 
- emptyLibraryMessage()
+
+ retrieve()
 
  submit.onclick = () => {
   let currentBook = new CreateBook(titleInput.value, authorInput.value, pagesInput.value, 'true')
   clearFields()
   addBookToLibrary(currentBook)
+  save()
   console.clear()
   displayBooks()
  }
-
-
 
 })
