@@ -1,71 +1,120 @@
-const form = document.querySelector('form')
-const submit = document.querySelector('#submit')
 let myLibrary = []
 
-function Book(title, author, pages, status){
+function CreateBook(title, author, pages, readStatus){
  this.title = title
  this.author = author
  this.pages = pages
- this.status = status
+ this.readStatus = readStatus
 }
+function addBookToLibrary(book){
+ myLibrary.push(book)
+ // let index = myLibrary.indexOf(book)
+ // book.index = index
+ // alert(index)
+}
+function displayBooks(){
 
-function addBookToLibrary(Book){
- myLibrary.append(Book)
+ document.querySelector('#cards').innerHTML = ''
+ let index = 0
+
+ for (book of myLibrary){
+  book.index = index++
+  console.log(book)
+  let div = document.createElement('div')
+  let h2 = document.createElement('h2')
+  let h4 = document.createElement('h4')
+  let h6 = document.createElement('h6')
+  let del = document.createElement('button')
+  let bool = document.createElement('button')
+  
+  let parent = document.createElement('div')
+  parent.className = 'card'
+  h2.innerHTML = book.title
+  
+  h4.innerHTML = `By <span>${book.author}</span>`
+  h6.innerHTML = `${book.pages} pages`
+  del.className = `del`
+  del.setAttribute('data-index', book.index)
+  del.setAttribute('type', 'button')
+  del.innerHTML = 'Delete'
+  del.addEventListener('click', removeBook)
+  function removeBook(){
+   let index = del.getAttribute('data-index')
+   myLibrary.splice(index, 1)
+   parent.remove()
+   // for (i of myLibrary){
+   //  console.log(i)
+   // }
+      displayBooks()
+   // alert(del.getAttribute('data-index'))
+  }
+  
+  
+
+  document.querySelector('#cards').append(parent)
+  parent.append(h2)
+  parent.append(h4)
+  parent.append(h6)
+  div.className = 'buttons column'
+  
+  div.append(del)
+  parent.append(div)
+ }
+ document.querySelector('#total-num').innerHTML = `Total number of books: <span class='bold'>${myLibrary.length}</span>`
+ 
+   
 }
 
 document.addEventListener('DOMContentLoaded', () => {
- document.querySelector('#submit').disabled = true
-
- 
- 
-
- document.addEventListener('keyup', () => {
-  if(document.querySelector('#title-inp').value !== '' && document.querySelector('#author-inp').value !== '' && document.querySelector('#pages-inp').value !== ''){
-   document.querySelector('#submit').style.backgroundColor = '#007c89'
-   document.querySelector('#submit').style.border = '1px solid #007c89'
-   document.querySelector('#submit').style.color = '#fff'
-   document.querySelector('#submit').style.cursor = 'pointer'
-   document.querySelector('#submit').disabled = false
-  } else {
-   document.querySelector('#submit').style.backgroundColor = 'transparent'
-   document.querySelector('#submit').style.border = '1px solid rgba(36,28,21,0.3)'
-   document.querySelector('#submit').style.color = 'rgba(36,28,21,0.3)'
-   document.querySelector('#submit').style.cursor = 'unset'
-   document.querySelector('#submit').disabled = true
-  }
- })
-
-
- document.querySelector('form').onsubmit = () => {
-  let div = document.createElement('div')
-  const h2 = document.createElement('h2')
-  const h4 = document.createElement('h4')
-  const h6 = document.createElement('h6')
-
-  let book = new Book(document.querySelector('#title-inp').value, document.querySelector('#author-inp').value, document.querySelector('#pages-inp').value, 'no')
-  addBookToLibrary(book)
-  console.log(myLibrary)
-  // let title = document.querySelector('#title-inp').value
-  // let author = document.querySelector('#author-inp').value
-  // let pages = document.querySelector('#pages-inp').value
-
-  div.className = 'card'
-  h2.innerHTML = title
-  h4.innerHTML = `By <span>${author}</span>`
-  h6.innerHTML = `${pages} pages`
-
-  document.querySelector('#cards').append(div)
-  div.append(h2)
-  div.append(h4)
-  div.append(h6)
-
-  // let div = document.createElement('div')
-  // let btn = document.createElement('button')
-  // div.className('buttons column')
-  // btn.innerHTML = 'READ'
-  // btn.className = 'bool'
-  
-  return false
+ const titleInput = document.querySelector('#title-inp')
+ const authorInput = document.querySelector('#author-inp')
+ const pagesInput = document.querySelector('#pages-inp')
+ const submit = document.querySelector('#submit')
+ function clearFields(){
+  titleInput.value = ''
+  authorInput.value = ''
+  pagesInput.value = ''
  }
+ if (myLibrary == null || myLibrary.length == 0){
+  const h2 = document.createElement('h2')
+  h2.innerHTML = 'There are no books in your library, please add some books.'
+  h2.className = 'no-books'
+  document.querySelector('#cards').append(h2)
+ }
+ 
+
+ submit.onclick = () => {
+  let currentBook = new CreateBook(titleInput.value, authorInput.value, pagesInput.value, 'true')
+  clearFields()
+  addBookToLibrary(currentBook)
+  // console.log(myLibrary)
+  console.clear()
+  displayBooks()
+  // currentBook = {}
+ }
+
+ // document.querySelector('#cards').addEventListener('click', (e) => {
+ //  if(e.target.classList.contains('del')){
+ //   e.parentElement.remove()
+ //   // alert(x.innerText)
+ //  }
+ // })
+
+ // document.querySelectorAll('.del').forEach(x => {
+ //  x.onclick = () => {
+ //   console.log('HAHAHAHAHAH')
+ //   // alert()
+ //   // let iindex = x.getAttribute('data-index')
+ //   // alert(iindex)
+ //   // myLibrary.splice()
+ //  }
+ // })
+
+ // let dels = document.getElementsByClassName('del')
+ // for (let i = 0; i < dels.length; i++){
+ //  i.addEventListener('click', (x) => {
+ //   alert()
+ //  })
+ // }
 
 })

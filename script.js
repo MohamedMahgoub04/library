@@ -1,9 +1,9 @@
 let myLibrary = []
 let index = 0
-// let readTotal = 0
-//  let notReadTotal = 0
+let readTotal = 0
+let notReadTotal = 0
 
-function setReadStatus(Book, readTotal, notReadTotal){
+function setReadStatus(Book){
  let bool = document.createElement('button')
  // let readTotal = 0
  // let notReadTotal = 0
@@ -12,7 +12,7 @@ function setReadStatus(Book, readTotal, notReadTotal){
  bool.innerHTML = Book.status
 
  if (Book.status == 'Read'){
-  readTotal++
+  // readTotal++
   bool.style.backgroundColor = 'rgb(186, 219, 204)'
   bool.onmouseover = () => {
    bool.style.backgroundColor = '#9BCBB5'
@@ -21,7 +21,7 @@ function setReadStatus(Book, readTotal, notReadTotal){
    bool.style.backgroundColor = 'rgb(186, 219, 204)'
   }
  } else {
-  notReadTotal++
+  // notReadTotal++
   bool.style.backgroundColor = 'rgb(245, 194, 199)'
   bool.onmouseover = () => {
    bool.style.backgroundColor = '#ED919A'
@@ -31,9 +31,7 @@ function setReadStatus(Book, readTotal, notReadTotal){
   }
  }
 
- document.querySelector('#total-num').innerHTML = `Total number of books: <span class='bold'>${myLibrary.length}</span>`
- document.querySelector('#total-read').innerHTML = `Read: <span class='bold'>${readTotal}</span>`
- document.querySelector('#total-notread').innerHTML = `Not Read: <span class='bold'>${notReadTotal}</span>`
+ 
  return bool
 }
 
@@ -45,8 +43,8 @@ function Book(title, author, pages, status){
 }
 
 function addBookToLibrary(Book){
- let readTotal = 0
- let notReadTotal = 0
+ // let readTotal = 0
+ // let notReadTotal = 0
  if (Book !== 0){
   myLibrary.push(Book)
  }
@@ -81,7 +79,21 @@ function addBookToLibrary(Book){
   div.append(setReadStatus(i))
   div.append(del)
   parent.append(div)
+
+  // 
+
+  if(i.status == 'Read'){
+   readTotal += 1
+  } else if (i.status == 'Not read'){
+   notReadTotal++
+  } else {
+   return
+  }
+  
  }
+ document.querySelector('#total-num').innerHTML = `Total number of books: <span class='bold'>${myLibrary.length}</span>`
+  document.querySelector('#total-read').innerHTML = `Read: <span class='bold'>${readTotal}</span>`
+  document.querySelector('#total-notread').innerHTML = `Not Read: <span class='bold'>${notReadTotal}</span>`
 }
 
 const save = () => {
@@ -102,7 +114,7 @@ const retrieve = () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
+ 
 
  retrieve()
 
