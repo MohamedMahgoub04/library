@@ -8,12 +8,18 @@ function CreateBook(title, author, pages, readStatus){
 }
 function addBookToLibrary(book){
  myLibrary.push(book)
- // let index = myLibrary.indexOf(book)
- // book.index = index
- // alert(index)
+}
+function emptyLibraryMessage(){
+ if (myLibrary == null || myLibrary.length == 0){
+  let h2 = document.createElement('h2')
+  h2.innerHTML = 'There are no books in your library, please add some books.'
+  h2.className = 'no-books'
+  document.querySelector('#cards').append(h2)
+ }
 }
 function displayBooks(){
-
+ 
+ 
  document.querySelector('#cards').innerHTML = ''
  let index = 0
 
@@ -39,14 +45,12 @@ function displayBooks(){
   del.innerHTML = 'Delete'
   del.addEventListener('click', removeBook)
   function removeBook(){
+   
    let index = del.getAttribute('data-index')
    myLibrary.splice(index, 1)
    parent.remove()
-   // for (i of myLibrary){
-   //  console.log(i)
-   // }
-      displayBooks()
-   // alert(del.getAttribute('data-index'))
+   displayBooks()
+   emptyLibraryMessage()
   }
   
   
@@ -75,46 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
   authorInput.value = ''
   pagesInput.value = ''
  }
- if (myLibrary == null || myLibrary.length == 0){
-  const h2 = document.createElement('h2')
-  h2.innerHTML = 'There are no books in your library, please add some books.'
-  h2.className = 'no-books'
-  document.querySelector('#cards').append(h2)
- }
  
+ emptyLibraryMessage()
 
  submit.onclick = () => {
   let currentBook = new CreateBook(titleInput.value, authorInput.value, pagesInput.value, 'true')
   clearFields()
   addBookToLibrary(currentBook)
-  // console.log(myLibrary)
   console.clear()
   displayBooks()
-  // currentBook = {}
  }
 
- // document.querySelector('#cards').addEventListener('click', (e) => {
- //  if(e.target.classList.contains('del')){
- //   e.parentElement.remove()
- //   // alert(x.innerText)
- //  }
- // })
 
- // document.querySelectorAll('.del').forEach(x => {
- //  x.onclick = () => {
- //   console.log('HAHAHAHAHAH')
- //   // alert()
- //   // let iindex = x.getAttribute('data-index')
- //   // alert(iindex)
- //   // myLibrary.splice()
- //  }
- // })
-
- // let dels = document.getElementsByClassName('del')
- // for (let i = 0; i < dels.length; i++){
- //  i.addEventListener('click', (x) => {
- //   alert()
- //  })
- // }
 
 })
