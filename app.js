@@ -1,10 +1,10 @@
 let myLibrary = []
 
-function CreateBook(title, author, pages, readStatus){
+function CreateBook(title, author, pages, read){
  this.title = title
  this.author = author
  this.pages = pages
- this.readStatus = readStatus
+ this.read = read
 }
 function addBookToLibrary(book){
  myLibrary.push(book)
@@ -45,7 +45,6 @@ function displayBooks(){
    let index = del.getAttribute('data-index')
    myLibrary.splice(index, 1)
    parent.remove()
-   save()
    displayBooks()
    if (myLibrary == null || myLibrary.length == 0){
     emptyLibraryMessage()
@@ -85,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentBook = new CreateBook(titleInput.value, authorInput.value, pagesInput.value, 'true')
   clearFields()
   addBookToLibrary(currentBook)
-  save()
   console.clear()
   displayBooks()
  }
