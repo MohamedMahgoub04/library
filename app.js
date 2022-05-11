@@ -1,10 +1,12 @@
 let myLibrary = []
 
-function Book(title, author, pages, readStatus){
+class Book{
+ constructor(title, author, pages, readStatus){
  this.title = title
  this.author = author
  this.pages = pages
  this.readStatus = readStatus
+ }
 }
 Book.prototype.toggleReadStatus = function(){
  if (this.readStatus == 'true'){
